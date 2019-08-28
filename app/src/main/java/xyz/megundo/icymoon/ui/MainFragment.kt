@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import kotlinx.android.synthetic.main.main_fragment.*
 import xyz.megundo.icymoon.R
@@ -34,8 +35,20 @@ class MainFragment : Fragment() {
         btn_submit.setOnClickListener {
             val payload = getDataFromViews()
             Log.d(TAG, "data $payload")
-            viewModel.getResponseFromServer(payload)
+            viewModel.getResponseFromServer(payload).observe(this, Observer { response ->
+                if (response == null || response.getError() != null) {
+                    showErrorMessage()
+                } else {
+                    Log.d(TAG, "resp ${response.getInformation()}")
+                }
+
+            })
+
         }
+    }
+
+    private fun showErrorMessage() {
+
     }
 
     private fun getDataFromViews(): Information {
