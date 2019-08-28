@@ -1,3 +1,11 @@
 <resources>
-    <string name="app_name">IcyMoon</string>
+    <string name="app_name">Lipa Later</string>
+    <string name="hintFname">First Name</string>
+    <string name="hintLname">Last Name</string>
+    <string name="hintId">ID Number</string>
+    <string name="hintPhone">Phone(07xx xxx xxx)</string>
+    <string name="hintemail">email address</string>
+    <string name="hintDesc">Description</string>
+    <string name="hintAmount">Amount</string>
+    <string name="btnSubmit">Submit</string>
 </resources>
