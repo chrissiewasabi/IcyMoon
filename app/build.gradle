@@ -32,6 +32,7 @@ dependencies {
 
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.moshi:moshi:$moshiVersion"
+    implementation "com.google.android.material:material:$materialVersion"
 
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensions"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleExtensions"
