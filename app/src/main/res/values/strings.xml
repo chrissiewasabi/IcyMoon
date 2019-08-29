@@ -8,4 +8,8 @@
     <string name="hintDesc">Description</string>
     <string name="hintAmount">Amount</string>
     <string name="btnSubmit">Submit</string>
+    <string name="error_message">An Error Occured!</string>
+    <string name="ok">OK</string>
+    <string name="success_message">Success</string>
+    <string name="not_empty">Enter a value</string>
 </resources>
