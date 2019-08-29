@@ -36,6 +36,7 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         btn_submit.setOnClickListener {
             if (inputValidated()) {
+                progressBar.visibility = View.VISIBLE
                 val payload = getDataFromViews()
                 Log.d(TAG, "data $payload")
                 viewModel.getResponseFromServer(payload).observe(this, Observer { response ->
@@ -45,6 +46,7 @@ class MainFragment : Fragment() {
                         Log.d(TAG, "resp ${response.getInformation()}")
                         showMessage(getString(R.string.success_message))
                     }
+                    progressBar.visibility = View.GONE
 
                 })
             }
