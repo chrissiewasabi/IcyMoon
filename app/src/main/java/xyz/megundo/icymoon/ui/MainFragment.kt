@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.android.synthetic.main.main_fragment.*
 import xyz.megundo.icymoon.R
 import xyz.megundo.icymoon.data.Application
@@ -37,9 +38,10 @@ class MainFragment : Fragment() {
             Log.d(TAG, "data $payload")
             viewModel.getResponseFromServer(payload).observe(this, Observer { response ->
                 if (response == null || response.getError() != null) {
-                    showErrorMessage()
+                    showMessage(getString(R.string.error_message))
                 } else {
                     Log.d(TAG, "resp ${response.getInformation()}")
+                    showMessage(getString(R.string.success_message))
                 }
 
             })
@@ -47,7 +49,12 @@ class MainFragment : Fragment() {
         }
     }
 
-    private fun showErrorMessage() {
+    private fun showMessage(message: String) {
+        MaterialAlertDialogBuilder(
+            context
+        )
+            .setMessage(message)
+            .setPositiveButton(getString(R.string.ok), null).show()
 
     }
 
