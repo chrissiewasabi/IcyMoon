@@ -9,7 +9,7 @@ import xyz.megundo.icymoon.repository.RepositoryProvider
 
 
 class MainViewModel : ViewModel() {
-    val infoLiveData = MediatorLiveData<ApiResponse>()
+    private val infoLiveData = MediatorLiveData<ApiResponse>()
 
     fun getResponseFromServer(data: Information): MutableLiveData<ApiResponse> {
         val repository = RepositoryProvider.provideRepository()
