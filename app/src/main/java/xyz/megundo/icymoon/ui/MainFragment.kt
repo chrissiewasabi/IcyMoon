@@ -1,6 +1,7 @@
 package xyz.megundo.icymoon.ui
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -34,17 +35,20 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         btn_submit.setOnClickListener {
-            val payload = getDataFromViews()
-            Log.d(TAG, "data $payload")
-            viewModel.getResponseFromServer(payload).observe(this, Observer { response ->
-                if (response == null || response.getError() != null) {
-                    showMessage(getString(R.string.error_message))
-                } else {
-                    Log.d(TAG, "resp ${response.getInformation()}")
-                    showMessage(getString(R.string.success_message))
-                }
+            if (inputValidated()) {
+                val payload = getDataFromViews()
+                Log.d(TAG, "data $payload")
+                viewModel.getResponseFromServer(payload).observe(this, Observer { response ->
+                    if (response == null || response.getError() != null) {
+                        showMessage(getString(R.string.error_message))
+                    } else {
+                        Log.d(TAG, "resp ${response.getInformation()}")
+                        showMessage(getString(R.string.success_message))
+                    }
 
-            })
+                })
+            }
+
 
         }
     }
@@ -80,6 +84,19 @@ class MainFragment : Fragment() {
         return Information(data)
 
 
+    }
+
+    private fun inputValidated(): Boolean {
+        var isValidated = true
+        val inputFields = listOf(txtFname, txtLname, txtPhone, txtEmail, txtId, txtDesc, txtAmount)
+        inputFields.forEach { field ->
+
+            if (TextUtils.isEmpty(field.text.toString())) {
+                field.setError(getString(R.string.not_empty), null)
+                isValidated = false
+            }
+        }
+        return isValidated
     }
 
 
